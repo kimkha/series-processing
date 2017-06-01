@@ -1,13 +1,13 @@
 
 export default class DataStream {
   constructor(data) {
-    this.data = data || [];
+    this.data = Object.assign([], data);
     this.length = this.data.length;
   }
 
   getData = () => this.data;
   setData = (data) => {
-    this.data = data || [];
+    this.data = Object.assign([], data);
     this.length = this.data.length;
   };
   push = (item) => {
