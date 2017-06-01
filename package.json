@@ -1,6 +1,6 @@
 {
   "name": "series-processing",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Time-series processing for forex, market analysis, including MA, EMA,...",
   "keywords": [
     "processing",
