@@ -6,6 +6,7 @@ series.then(studies.EMA('ema2', 'close', 10));
 series.then((record) => {
   return { macd: record['ema2'] - record['ema1'] };
 });
+series.then(studies.EMA('emacd', 'macd', 9));
 
 const data = [
   {
@@ -31,4 +32,4 @@ const data = [
 series.initData(data);
 series.appendData({ close: 242 });
 
-console.log(JSON.stringify(series.getData()));
+console.log(JSON.stringify(series.getData(), null, 2));
