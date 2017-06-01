@@ -14,17 +14,11 @@ export class MACD {
 
   prepareSeries = () => {
     this.series
-      .then(studies.EMA('fast', 'close', this.fastLength)) // fast = ema(close, fastLength)
-      .then(studies.EMA('slow', 'close', this.slowLength)) // slow = ema(close, slowLength)
-      .then(
-        (record) => {
-          return { macd: record['fast'] - record['slow'] };
-        }) // macd = fast - slow
-      .then(studies.EMA('emacd', 'macd', this.signalLength)) // emacd = ema(macd, signalLength)
-      .then(
-        (record) => {
-          return { delta: record['macd'] - record['emacd'] };
-        }); // delta = macd - emacd
+      .then(studies.EMA('fast', 'close', this.fastLength))    // fast = ema(close, fastLength)
+      .then(studies.EMA('slow', 'close', this.slowLength))    // slow = ema(close, slowLength)
+      .then(studies.subtract('macd', 'fast', 'slow'))         // macd = fast - slow
+      .then(studies.EMA('emacd', 'macd', this.signalLength))  // emacd = ema(macd, signalLength)
+      .then(studies.subtract('result', 'macd', 'emacd'));     // result = macd - emacd
   };
 
   applyData = (data) => {
