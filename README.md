@@ -39,6 +39,17 @@ series.then(studyBuilder.SMA('sma1', 'open', 4));
 series.then(studyBuilder.EMA('ema2', 'sma1', 5));
 ```
 
+OR with array
+
+```javascript
+const series = new TimeSeries();
+series.then([
+  studyBuilder.EMA('ema1', 'close', 2),
+  studyBuilder.SMA('sma1', 'open', 4),
+  studyBuilder.EMA('ema2', 'sma1', 5)
+]);
+```
+
 ### Custom study
 
 ```javascript
