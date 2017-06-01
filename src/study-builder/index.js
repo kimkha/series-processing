@@ -1,5 +1,6 @@
 // Basic
 export * from './operations';
+export * from './cross';
 
 // Main
 export * from './EMA';

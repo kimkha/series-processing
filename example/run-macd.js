@@ -24,8 +24,16 @@ const data = [
   }
 ];
 
-const m1 = new TimeSeries().then(studyBuilder.MACD('delta', 'close', 2, 3, 9)).initData(data).getDataSeries();
-const m2 = new TimeSeries().then(studyBuilder.MACD('delta', 'close', 4, 6, 9)).initData(data).getDataSeries();
+const m1 = new TimeSeries()
+  .then(studyBuilder.MACD('delta', 'close', 2, 3, 9))
+  .then(studyBuilder.crossover('long', 'delta', 0))
+  .then(studyBuilder.crossunder('short', 'delta', 0))
+  .initData(data).getDataSeries().map(r => ({ delta: r.delta, long: r.long, short: r.short }));
+const m2 = new TimeSeries()
+  .then(studyBuilder.MACD('delta', 'close', 4, 6, 9))
+  .then(studyBuilder.crossover('long', 'delta', 0))
+  .then(studyBuilder.crossunder('short', 'delta', 0))
+  .initData(data).getDataSeries().map(r => ({ delta: r.delta, long: r.long, short: r.short }));
 
 console.log("\n\nM1: ----------");
 console.log(JSON.stringify(m1, null, 2));
