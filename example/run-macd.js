@@ -1,4 +1,4 @@
-const { TimeSeries, studies } = require('../lib');
+const { TimeSeries, studyBuilder } = require('../lib');
 
 const data = [
   {
@@ -24,8 +24,8 @@ const data = [
   }
 ];
 
-const m1 = new TimeSeries().then(studies.MACD('delta', 'close', 2, 3, 9)).initData(data).getDataSeries();
-const m2 = new TimeSeries().then(studies.MACD('delta', 'close', 4, 6, 9)).initData(data).getDataSeries();
+const m1 = new TimeSeries().then(studyBuilder.MACD('delta', 'close', 2, 3, 9)).initData(data).getDataSeries();
+const m2 = new TimeSeries().then(studyBuilder.MACD('delta', 'close', 4, 6, 9)).initData(data).getDataSeries();
 
 console.log("\n\nM1: ----------");
 console.log(JSON.stringify(m1, null, 2));
