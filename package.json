@@ -1,7 +1,20 @@
 {
   "name": "series-processing",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Time-series processing for forex, market analysis, including MA, EMA,...",
+  "keywords": [
+    "processing",
+    "forex",
+    "market analysis",
+    "forecast",
+    "forecasting",
+    "timeseries",
+    "stats",
+    "smoothing",
+    "moving average",
+    "noise removal",
+    "autoregression"
+  ],
   "main": "lib/index.js",
   "files": [
     "*.md",
