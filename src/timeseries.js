@@ -48,6 +48,9 @@ export default class TimeSeries {
       });
 
       // TODO Call func if data exists
+      if (this.dataStream.hasData()) {
+
+      }
     }
 
     return this;

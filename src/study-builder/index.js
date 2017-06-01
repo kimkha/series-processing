@@ -1,5 +1,5 @@
 // Basic
-export * from './subtract';
+export * from './operations';
 
 // Main
 export * from './EMA';

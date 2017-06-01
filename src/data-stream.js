@@ -14,6 +14,7 @@ export default class DataStream {
     this.data.push(item);
     this.length = this.data.length;
   };
+  hasData = () => this.length > 0;
   getLast = () => (this.length >= 1) ? this.data[this.length - 1] : null;
   getPrevious = () => (this.length >= 2) ? this.data[this.length - 2] : null;
   getLastSegment = (length) => {
