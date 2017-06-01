@@ -1,10 +1,10 @@
-import TimeSeries from '../timeseries';
+import BaseStrategy from './base';
 import * as studies from '../studies';
 
-export class MACD {
-  series = new TimeSeries();
-
+export class MACD extends BaseStrategy {
   constructor(fastLength, slowLength, signalLength) {
+    super();
+
     this.fastLength = Math.max(1, fastLength);
     this.slowLength = Math.max(1, slowLength);
     this.signalLength = Math.max(1, signalLength);
@@ -21,8 +21,4 @@ export class MACD {
       .then(studies.subtract('result', 'macd', 'emacd'));     // result = macd - emacd
   };
 
-  applyData = (data) => {
-    this.series.initData(data);
-    return this.series.getData();
-  };
 }

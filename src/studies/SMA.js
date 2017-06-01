@@ -1,6 +1,8 @@
 /**
  * Simple Moving Average
  * @see https://en.wikipedia.org/wiki/Moving_average
+ *
+ * <output series> = sma(<input series>, length)
  */
 export const SMA = (outputKey, inputKey, length) => (lastPoint, dataStream) => {
   const segment = dataStream.getLastSegment(length);

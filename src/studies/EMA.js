@@ -1,6 +1,8 @@
 /**
  * Exponential Moving Average
  * @see https://en.wikipedia.org/wiki/Exponential_smoothing
+ *
+ * <output series> = ema(<input series>, length)
  */
 export const EMA = (outputKey, inputKey, length) => (lastPoint, dataStream) => {
   if (typeof lastPoint === 'undefined' || typeof lastPoint[inputKey] === 'undefined') {

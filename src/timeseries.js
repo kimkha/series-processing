@@ -11,6 +11,7 @@ export default class TimeSeries {
   }
 
   getData = () => this.dataStream.getData();
+  getLatest = () => this.dataStream.getLast();
 
   initData = (data = [], skip = false) => {
     if (skip) {
