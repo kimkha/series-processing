@@ -10,7 +10,7 @@ export default class TimeSeries {
     this.dataStream = new DataStream();
   }
 
-  getData = () => this.dataStream.getData();
+  getDataSeries = () => this.dataStream.getData();
   getLatest = () => this.dataStream.getLast();
 
   initData = (data = [], skip = false) => {
@@ -38,7 +38,10 @@ export default class TimeSeries {
   };
 
   then = (func) => {
-    if (typeof func === 'function') {
+    if (Array.isArray(func)) {
+      // Recursive add to chain if array
+      func.map(f => this.then(f));
+    } else if (typeof func === 'function') {
       this.chain.push({
         type: 'then',
         func,

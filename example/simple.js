@@ -35,4 +35,4 @@ const data = [
 series.initData(data);
 series.appendData({ close: 242 });
 
-console.log(JSON.stringify(series.getData(), null, 2));
+console.log(JSON.stringify(series.getDataSeries(), null, 2));
