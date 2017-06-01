@@ -1,22 +1,23 @@
+import DataStream from './data-stream';
 
 export default class TimeSeries {
-  data = [];
   chain = [];
 
   constructor(options) {
     this.options = Object.assign({
       // Default value
     }, options);
+    this.dataStream = new DataStream();
   }
 
-  getData = () => this.data;
+  getData = () => this.dataStream.getData();
 
   initData = (data = [], skip = false) => {
     if (skip) {
-      this.data = data;
+      this.dataStream.setData(data);
     } else {
       // Append one-by-one
-      this.data = [];
+      this.dataStream.setData(null);
 
       data.map(record => this.appendData(record));
     }
@@ -26,10 +27,10 @@ export default class TimeSeries {
 
   appendData = (record) => {
     // TODO How about update last data?
-    this.data.push(record);
+    this.dataStream.push(record);
 
     for (let { func } of this.chain) {
-      Object.assign(record, func(record, this.data));
+      Object.assign(record, func(record, this.dataStream));
     }
 
     return this;
@@ -49,6 +50,6 @@ export default class TimeSeries {
   };
 
   aggregate = (func) => {
-    return func(this.data);
+    return func(this.dataStream);
   };
 }

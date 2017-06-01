@@ -1,12 +1,16 @@
-
-export const EMA = (outputKey, inputKey, length) => (record, fullData) => {
-  if (typeof record === 'undefined' || typeof record[inputKey] === 'undefined') {
+/**
+ * Exponential Moving Average
+ * @see https://en.wikipedia.org/wiki/Exponential_smoothing
+ */
+export const EMA = (outputKey, inputKey, length) => (lastPoint, dataStream) => {
+  if (typeof lastPoint === 'undefined' || typeof lastPoint[inputKey] === 'undefined') {
     return null;
   }
 
-  const lastPoint = (fullData.length >= 2) ? fullData[fullData.length - 2]: null;
-  const previousEma = (lastPoint && lastPoint[inputKey]) ? lastPoint[inputKey] : record[inputKey];
+  const previousPoint = dataStream.getPrevious();
+  // Use the last data item as the first previous EMA value (if not previous point)
+  const previousEma = (previousPoint && previousPoint[inputKey]) ? previousPoint[inputKey] : lastPoint[inputKey];
   const K = 2 / (1 + length);
-  const ema = (record[inputKey] * K) + (previousEma * (1 - K));
+  const ema = (lastPoint[inputKey] * K) + (previousEma * (1 - K));
   return { [outputKey] : ema };
 };
