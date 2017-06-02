@@ -30,8 +30,10 @@ export default class TimeSeries {
     // TODO How about update last data?
     this.dataStream.push(record);
 
-    for (let { func } of this.chain) {
-      Object.assign(record, func(record, this.dataStream));
+    for (let { type, func } of this.chain) {
+      if (type === 'map') {
+        Object.assign(record, func(record, this.dataStream));
+      }
     }
 
     return this;
@@ -55,6 +57,8 @@ export default class TimeSeries {
 
     return this;
   };
+
+  // TODO Reduce function?
 
   aggregate = (func) => {
     return func(this.dataStream);

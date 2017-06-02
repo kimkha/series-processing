@@ -10,7 +10,7 @@ export const EMA = (outputKey, inputKey, length) => (lastPoint, dataStream) => {
   }
 
   const previousPoint = dataStream.getPrevious();
-  // Use the last data item as the first previous EMA value (if not previous point)
+  // Use the last data item as the first previous EMA value (if not available)
   const previousEma = (previousPoint && previousPoint[inputKey]) ? previousPoint[inputKey] : lastPoint[inputKey];
   const K = 2 / (1 + length);
   const ema = (lastPoint[inputKey] * K) + (previousEma * (1 - K));
