@@ -37,13 +37,13 @@ export default class TimeSeries {
     return this;
   };
 
-  then = (func) => {
+  map = (func) => {
     if (Array.isArray(func)) {
       // Recursive add to chain if array
-      func.map(f => this.then(f));
+      func.map(f => this.map(f));
     } else if (typeof func === 'function') {
       this.chain.push({
-        type: 'then',
+        type: 'map',
         func,
       });
 

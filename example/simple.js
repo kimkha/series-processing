@@ -1,7 +1,7 @@
 const { TimeSeries, studyBuilder } = require('../lib');
 
 const series = new TimeSeries();
-series.then(studyBuilder.EMA('ema1', 'close', 2));
+series.map(studyBuilder.EMA('ema1', 'close', 2));
 
 const data = [
   {

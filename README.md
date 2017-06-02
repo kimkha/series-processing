@@ -21,7 +21,7 @@ Time-series processing for forex, market analysis, including SMA, EMA, MACD...
 const { TimeSeries, studyBuilder } = require('../lib');
 
 const series = new TimeSeries();
-series.then(studyBuilder.EMA('ema1', 'close', 2));
+series.map(studyBuilder.EMA('ema1', 'close', 2));
 
 series.initData(data); // data: Array of candle object
 
@@ -34,16 +34,16 @@ More studyBuilder can found [here](https://github.com/kimkha/series-processing/t
 
 ```javascript
 const series = new TimeSeries();
-series.then(studyBuilder.EMA('ema1', 'close', 2));
-series.then(studyBuilder.SMA('sma1', 'open', 4));
-series.then(studyBuilder.EMA('ema2', 'sma1', 5));
+series.map(studyBuilder.EMA('ema1', 'close', 2));
+series.map(studyBuilder.SMA('sma1', 'open', 4));
+series.map(studyBuilder.EMA('ema2', 'sma1', 5));
 ```
 
 OR with array
 
 ```javascript
 const series = new TimeSeries();
-series.then([
+series.map([
   studyBuilder.EMA('ema1', 'close', 2),
   studyBuilder.SMA('sma1', 'open', 4),
   studyBuilder.EMA('ema2', 'sma1', 5)
@@ -54,7 +54,7 @@ series.then([
 
 ```javascript
 const series = new TimeSeries();
-series.then((lastPoint) => {
+series.map((lastPoint) => {
   return { 'avg' : (lastPoint['open'] + lastPoint['close']) / 2 }
 });
 ```
