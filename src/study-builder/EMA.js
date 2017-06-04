@@ -27,7 +27,7 @@ const processEma = (startRes, startVal, newVal, K, distance) => {
   let newRes = startRes;
   for (let i=1; i<=distance; i++) {
     const currVal = startVal + i * delta;
-    console.log(`Curr: ${currVal}, ${startVal}, ${newRes}`);
+    // console.log(`Curr: ${currVal}, ${startVal}, ${newRes}`);
     newRes = K * currVal + (1 - K) * newRes;
   }
   return newRes;
