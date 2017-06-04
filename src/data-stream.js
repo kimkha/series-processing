@@ -72,6 +72,7 @@ export default class DataStream {
   };
 
   calcDistanceWithLast() {
+    if (!this.getLast() || !this.getPrevious()) return 0;
     const lastTime = +this.options.timeformat(this.getLast()[this.options.timefield]);
     const prevTime = +this.options.timeformat(this.getPrevious()[this.options.timefield]);
     return Math.ceil((lastTime - prevTime) / this.timeBlockInMs); // deltaTime / timeBlock
