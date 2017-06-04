@@ -14,9 +14,9 @@ export const EMA = (outputKey, inputKey, length) => (lastPoint, dataStream) => {
   const previousEma = (previousPoint && previousPoint[outputKey]) ? previousPoint[outputKey] : lastPoint[inputKey];
   const previousVal = (previousPoint) ? previousPoint[inputKey] : lastPoint[inputKey];
   const K = 2 / (1 + length);
-  const distance = dataStream.calcDistanceWithLast();
-  const ema = processEma(previousEma, previousVal, lastPoint[inputKey], K, distance);
-  // const ema = (lastPoint[inputKey] * K) + (previousEma * (1 - K));
+  // const distance = dataStream.calcDistanceWithLast();
+  // const ema = processEma(previousEma, previousVal, lastPoint[inputKey], K, distance);
+  const ema = (lastPoint[inputKey] - previousEma) * K + previousEma;
   return { [outputKey] : ema, d: dataStream.calcDistanceWithLast() };
 };
 
