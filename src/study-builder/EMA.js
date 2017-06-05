@@ -11,12 +11,12 @@ export const EMA = (outputKey, inputKey, length) => (lastPoint, dataStream) => {
   }
 
   const previousPoint = dataStream.getPrevious();
-  // Use the last data item as the first previous EMA value (if not available)
   let previousEma = null;
   if (previousPoint && previousPoint[outputKey]) {
     previousEma = previousPoint[outputKey];
   } else {
-    const sma = SMA(`test`, 'close', length);
+    // Use SMA when the first previous EMA value is not available
+    const sma = SMA(`test`, 'close', length)(lastPoint, dataStream);
     if (sma && sma[`test`]) {
       previousEma = sma[`test`];
     }
@@ -24,23 +24,7 @@ export const EMA = (outputKey, inputKey, length) => (lastPoint, dataStream) => {
 
   if (!previousEma) return null;
 
-  // const previousVal = (previousPoint) ? previousPoint[inputKey] : lastPoint[inputKey];
   const K = 2 / (1 + length);
-  // const distance = dataStream.calcDistanceWithLast();
-  // const ema = processEma(previousEma, previousVal, lastPoint[inputKey], K, distance);
   const ema = (lastPoint[inputKey] - previousEma) * K + previousEma;
-  return { [outputKey] : ema, d: dataStream.calcDistanceWithLast() };
-};
-
-const processEma = (startRes, startVal, newVal, K, distance) => {
-  if (distance === 0) return newVal;
-
-  const delta = (newVal - startVal) / distance;
-  let newRes = startRes;
-  for (let i=1; i<=distance; i++) {
-    const currVal = startVal + i * delta;
-    // console.log(`Curr: ${currVal}, ${startVal}, ${newRes}`);
-    newRes = K * currVal + (1 - K) * newRes;
-  }
-  return newRes;
+  return { [outputKey] : ema };
 };
